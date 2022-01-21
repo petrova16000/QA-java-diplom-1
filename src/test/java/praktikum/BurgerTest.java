@@ -41,15 +41,15 @@ public class BurgerTest {
 
     @Test
     public void moveIngredient() {
-        Ingredient ingredient1 = new Ingredient(IngredientType.SAUCE,"test1", 17);
-        Ingredient ingredient2 = new Ingredient(IngredientType.FILLING,"test2", 34);
+        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE,"test1", 17);
+        Ingredient ingredientFilling = new Ingredient(IngredientType.FILLING,"test2", 34);
         Burger burger = new Burger();
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredientFilling);
         burger.moveIngredient(0, 1);
-        Assert.assertEquals(burger.ingredients.get(0).getType(), ingredient2.type);
-        Assert.assertEquals(burger.ingredients.get(0).getName(), ingredient2.name);
-        Assert.assertEquals(burger.ingredients.get(0).getPrice(), ingredient2.price, 0);
+        Assert.assertEquals(burger.ingredients.get(0).getType(), ingredientFilling.type);
+        Assert.assertEquals(burger.ingredients.get(0).getName(), ingredientFilling.name);
+        Assert.assertEquals(burger.ingredients.get(0).getPrice(), ingredientFilling.price, 0);
     }
 
     @Test
@@ -57,10 +57,10 @@ public class BurgerTest {
         Bun bun = new Bun("test", 14);
         Burger burger = new Burger();
         burger.setBuns(bun);
-        Ingredient ingredient1 = new Ingredient(IngredientType.SAUCE,"test1", 17);
-        Ingredient ingredient2 = new Ingredient(IngredientType.FILLING,"test2", 34);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE,"test1", 17);
+        Ingredient ingredientFilling = new Ingredient(IngredientType.FILLING,"test2", 34);
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredientFilling);
         Assert.assertEquals(burger.getPrice(), 79, 0);
     }
 
@@ -69,17 +69,13 @@ public class BurgerTest {
         Bun bun = new Bun("test", 14);
         Burger burger = new Burger();
         burger.setBuns(bun);
-        Ingredient ingredient1 = new Ingredient(IngredientType.SAUCE,"test1", 17);
-        Ingredient ingredient2 = new Ingredient(IngredientType.FILLING,"test2", 34);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE,"test1", 17);
+        Ingredient ingredientFilling = new Ingredient(IngredientType.FILLING,"test2", 34);
+        burger.addIngredient(ingredientSauce);
+        burger.addIngredient(ingredientFilling);
         burger.getReceipt();
-        Assert.assertEquals(burger.getReceipt(),"(==== test ====)\r\n" +
-                "= sauce test1 =\r\n" +
-                "= filling test2 =\r\n" +
-                "(==== test ====)\r\n" +
-                "\r\n" +
-                "Price: 79,000000\r\n");
-    }
+        Assert.assertEquals(burger.getReceipt(),String.join("\r\n", "(==== test ====)",
+                "= sauce test1 =", "= filling test2 =", "(==== test ====)", "", "Price: 79,000000", ""));
 
+    }
 }
